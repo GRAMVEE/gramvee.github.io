@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.gramvee.app",
+      "sha256_cert_fingerprints": [
+        "6C:23:2E:FF:59:18:71:D6:90:A3:52:94:8D:32:ED:81:E5:B1:3C:3E:69:D5:57:8F:40:49:BE:FA:26:98:00:7F"
+      ]
+    }
+  }
+]

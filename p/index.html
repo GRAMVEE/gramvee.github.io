@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منشور على GRAMVEE</title>
+<meta name="description" content="افتح المنشور في تطبيق GRAMVEE.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GRAMVEE">
+<meta property="og:title" content="منشور على GRAMVEE">
+<meta property="og:description" content="افتح المنشور في تطبيق GRAMVEE.">
+<meta property="og:image" content="https://gramvee.github.io/assets/gramvee-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/gramvee-512.png">
+<style>
+  :root { --ink:#1d2420; --muted:#5d6762; --accent:#0d4f3b; --bg:#f6f3ec; --card:#fffdf8; --line:#e3d9c3; }
+  @media (prefers-color-scheme: dark) { :root { --ink:#ece8de; --muted:#a8b0aa; --accent:#7fc9a8; --bg:#121815; --card:#18201c; --line:#33403a; } }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--ink);
+         font:16px/1.7 "Tajawal", system-ui, sans-serif; padding:16px; }
+  main { width:100%; max-width:380px; background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:32px 24px; text-align:center; }
+  img { width:88px; height:88px; border-radius:22px; }
+  h1 { font-size:1.35rem; margin:16px 0 4px; }
+  p { color:var(--muted); margin:0 0 24px; }
+  a.btn { display:block; padding:13px 16px; border-radius:12px; text-decoration:none; font-weight:700; margin-top:10px; }
+  a.primary { background:#0d4f3b; color:#fff; }
+  a.secondary { border:1px solid var(--line); color:var(--accent); }
+  a.disabled { opacity:.55; pointer-events:none; }
+  small { display:block; margin-top:18px; color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <img src="/assets/gramvee-512.png" alt="GRAMVEE">
+  <h1>منشور على GRAMVEE</h1>
+  <p>افتح المنشور في تطبيق GRAMVEE.</p>
+  <a class="btn primary" id="open" href="#">فتح في التطبيق</a>
+  <a class="btn secondary disabled" id="store" href="#">قريبًا على Google Play</a>
+  <small>GRAMVEE · <a href="/privacy.html" style="color:inherit">الخصوصية</a></small>
+</main>
+<script>
+  // Only UUID ids are passed on; anything else opens the app's home screen.
+  (function () {
+    var PLAY = 'https://play.google.com/store/apps/details?id=com.gramvee.app';
+    var PLAY_PUBLISHED = false; // set to true once the app is live on Google Play
+    var id = new URLSearchParams(location.search).get('id') || '';
+    var ok = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+    var target = 'gramvee.github.io/p/' + (ok ? '?id=' + id.toLowerCase() : '');
+    var fallback = encodeURIComponent(PLAY_PUBLISHED ? PLAY : location.href);
+    document.getElementById('open').href =
+      'intent://' + target + '#Intent;scheme=https;package=com.gramvee.app;S.browser_fallback_url=' + fallback + ';end';
+    if (PLAY_PUBLISHED) {
+      var store = document.getElementById('store');
+      store.href = PLAY; store.textContent = 'تحميل من Google Play'; store.classList.remove('disabled');
+    }
+  })();
+</script>
+</body>
+</html>
